@@ -3,7 +3,7 @@
     it contains the encryption and decryption operations of the cipher
 """
 import os
-def ceasarEncryption(plaintext, shiftValue):
+def ceasarEncryption(plaintext, shiftValue=3):
     ciphertext = ''
     for char in plaintext:
         # handle spaces within the message provided 
@@ -28,7 +28,7 @@ def ceasarEncryption(plaintext, shiftValue):
 
     return ciphertext
 
-def ceasarDecryption(ciphertext, shiftValue):
+def ceasarDecryption(ciphertext, shiftValue=3):
     plaintext = ''
     for char in ciphertext:
         # handle spaces within the ciphertext
@@ -53,5 +53,3 @@ def ceasarDecryption(ciphertext, shiftValue):
         plaintext += temp
         
     return plaintext
-
-# def createTextFile():
