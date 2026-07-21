@@ -30,11 +30,16 @@ operationGroup.add_argument(
     help="decrypt the intended message"
 )
 
-parser.add_argument(
+inputSource = parser.add_mutually_exclusive_group(required=True)
+inputSource.add_argument(
     "-m", "--message",
     type=str,
-    required=True,
     help="the message to process (wrap in quotes if it contains spaces)"
+)
+inputSource.add_argument(
+    "-f", "--file",
+    type=str,
+    help="file containing the message that needs to be processed"
 )
 
 parser.add_argument(
@@ -114,12 +119,24 @@ def saveOutputToFile(originalMessage, resultMessage, isEncrypting):
 
     print("Output saved in output.txt")
 
-if args.encrypt:
-    output = ceasarEncryption(args.message, args.key)
+# reading text from a file
+def readInputFromFile(inputFilePath):
+    with open(inputFilePath, 'r') as path:
+        originalMessage = path.read()
+
+    return originalMessage
+
+if args.file is None:
+    messageContent = args.message
 else:
-    output = ceasarDecryption(args.message, args.key)
+    messageContent = readInputFromFile(args.file)
+
+if args.encrypt:
+    output = ceasarEncryption(messageContent, args.key)
+else:
+    output = ceasarDecryption(messageContent, args.key)
 
 if args.outputFile:
-    saveOutputToFile(args.message, output, args.encrypt)
+    saveOutputToFile(messageContent, output, args.encrypt)
 else:
     print(output)
