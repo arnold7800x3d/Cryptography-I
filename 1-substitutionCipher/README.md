@@ -92,4 +92,4 @@ To get the input from a file, use a `.txt` file and run this command:
 ```
 python ceasarCipher(x).py -e/-d -f input.txt -k number 
 ```
-You can either print to the terminal or to a file.
+You can further print to the terminal or to a file by adding the -o flag.
