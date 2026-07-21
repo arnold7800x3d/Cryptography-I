@@ -1,15 +1,22 @@
+#!/usr/bin/env python3
+
 """
     this is the second version of the implementation of the ceaser cipher.
     it takes a different approach by using arrays. 
 """
+
 import argparse
 import os
 
+class CustomFormatter(argparse.ArgumentDefaultsHelpFormatter, argparse.RawDescriptionHelpFormatter):
+    pass
+
 parser = argparse.ArgumentParser(
-    formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+    formatter_class=CustomFormatter,
     description="Encrypt or decrypt messages using the Caesar Cipher, a classic substitution cipher " \
     "that shifts each letter by a fixed number of positions.",
-    epilog="Built by arnold7800x3d"
+    epilog="Built by: Arnold Ochieng'.\n"
+           "Developer GitHub link: https://github.com/arnold7800x3d"
 )
 
 operationGroup = parser.add_mutually_exclusive_group(required=True)
@@ -121,4 +128,3 @@ if args.outputFile:
     saveOutputToFile(args.message, output, args.encrypt)
 else:
     print(output)
-
